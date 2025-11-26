@@ -68,10 +68,10 @@ for i in range(20):
     img_random = f"{img_random:05d}"
     # img_random = "00114"
     print(img_random)
-    img = f"/home/osim-mir/student/mo/sam/data/yolo_dir/test/images/test_{img_random}.jpg"
-    masked = f"/home/osim-mir/student/mo/sam/data/yolo_dir/test/labels/test_{img_random}.txt"
+    img = f"/home/osim-mir/student/mo/sam/data/yolo/test/images/test_{img_random}.jpg"
+    masked = f"/home/osim-mir/student/mo/sam/data/yolo/test/labels/test_{img_random}.txt"
     # YOLO predictions - keep organized under yolo subdirectory
     yolo_results = f"/home/osim-mir/student/mo/sam/USIS10K/work_dirs/yolo/predictions/test_{img_random}.jpg"
     # USIS predictions - separate subdirectory for clarity
-    our_model_results_confidence = f"/home/osim-mir/student/mo/sam/USIS10K/work_dirs/usis/predictions/test_{img_random}.jpg"
+    our_model_results_confidence = f"/home/osim-mir/student/mo/sam/USIS10K/work_dirs/usis_multiclass_eval/20251120_210127/vis_data/vis_image/test_{img_random}.jpg"
     visualize_mask(img, masked, yolo_results, our_model_results_confidence)
