@@ -18,6 +18,7 @@ wandb/
 logs/
 output/
 yolo/
+*.pt 
 
 # Model weights
 *.pth
