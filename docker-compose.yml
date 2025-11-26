@@ -1,0 +1,27 @@
+# Docker image for YOLO train if you want to run  it go where is dir of the file and run
+# docker-compose up -d
+# Then inside the docker run  python yolo_train.py
+
+
+version: '3.8'
+
+services:
+  yolo-training:
+    image: ultralytics/ultralytics:latest
+    container_name: yolo
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - /home/osim-mir/student/mo/sam:/workspace
+    working_dir: /workspace/USIS10K/yolo
+    shm_size: '16gb'
+    stdin_open: true
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

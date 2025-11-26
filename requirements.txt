@@ -1,0 +1,11 @@
+mmengine>=0.10.0
+transformers==4.50.3
+pycocotools
+pillow
+numpy<2.0
+scipy
+matplotlib
+tqdm
+pyyaml
+mmdet==3.3.0
+

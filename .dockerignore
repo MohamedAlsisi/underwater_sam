@@ -1,0 +1,13 @@
+.git
+data/
+work_dirs/
+checkpoints/
+pretrain/
+runs/
+wandb/
+logs/
+__pycache__/
+*.pth
+*.bin
+*.safetensors
+*.h5
