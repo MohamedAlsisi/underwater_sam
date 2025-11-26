@@ -17,8 +17,12 @@ runs/
 wandb/
 logs/
 output/
-yolo/
-*.pt 
+# YOLO model weights only (keep .py files)
+yolo/*.pt
+yolo/**/*.pt
+yolo/**/*.pth
+yolo/**/*.bin
+
 
 # Model weights
 *.pth
