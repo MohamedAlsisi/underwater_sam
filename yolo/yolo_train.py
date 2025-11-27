@@ -64,16 +64,16 @@ current_dir = os.getcwd()
 # DATASET_PATH = '/home/osim-mir/student/mo/sam/data/yolo/data.yaml'
 
 DATASET_PATH = '/workspace/data/yolo/data.yaml' 
-PRETRAINED_WEIGHTS = 'yolo11x-seg.pt'  # ← CHANGED: simplified
+PRETRAINED_WEIGHTS = 'yolo11m-seg.pt'  # ← CHANGED: simplified
 OUTPUT_DIR1 = '/workspace/USIS10K/work_dirs/yolo/predictions'  # ← CHANGED: absolute path
-OUTPUT_DIR = os.path.join(OUTPUT_DIR1, 'runs', 'segment', 'train')
+OUTPUT_DIR = os.path.join(OUTPUT_DIR1, 'runs', 'segment', 'trainm150')
 
 
 # ================================
 # Fine-Tuning Parameters
 # ================================
-EPOCHS = 50  # ← CHANGED: 50 → 100
-BATCH_SIZE = 8  # ← CHANGED: 16 → 8 (for xlarge model)
+EPOCHS = 100  # ← CHANGED: 50 → 100
+BATCH_SIZE = 16  # ← CHANGED: 16 → 8 (for xlarge model)
 IMG_SIZE = 640
 DEVICE = "cuda" 
 

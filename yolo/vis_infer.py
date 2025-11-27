@@ -4,6 +4,7 @@ import os
 from glob import glob
 
 def vis_infer(
+   
     checkpoints="/home/mundus/ymorsy172/USIS10K/work_dirs/USIS10KDataset/huge/best_coco_segm_mAP_epoch_21.pth",
     config='/home/osim-mir/student/mo/sam/USIS10K/project/our/configs/multiclass_usis_train.py',
     data_dir='/home/osim-mir/student/mo/sam/data/USIS10K',
