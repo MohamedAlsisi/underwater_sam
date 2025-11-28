@@ -71,7 +71,7 @@ for i in range(20):
     img = f"/home/osim-mir/student/mo/sam/data/yolo/test/images/test_{img_random}.jpg"
     masked = f"/home/osim-mir/student/mo/sam/data/yolo/test/labels/test_{img_random}.txt"
     # YOLO predictions - keep organized under yolo subdirectory
-    model_name = "trainl"  # whatever your variable is
+    model_name = "trainx200"  # whatever your variable is
     yolo_results = f"/home/osim-mir/student/mo/sam/USIS10K/work_dirs/yolo/predictions/runs/segment/{model_name}/results/test_{img_random}.jpg"    
     our_model_results_confidence = f"/home/osim-mir/student/mo/sam/USIS10K/work_dirs/usis_multiclass_eval/20251120_210127/vis_data/vis_image/test_{img_random}.jpg"
     visualize_mask(img, masked, yolo_results, our_model_results_confidence)

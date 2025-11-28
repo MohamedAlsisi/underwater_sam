@@ -5,7 +5,7 @@ from ultralytics import YOLO
 # 🛠️ USER CONFIGURATION
 # ================================
 # Change these two variables to switch between models/experiments
-MODEL_NAME = "trainl"       # Main folder (e.g., trainl, trainm, trainm150)
+MODEL_NAME = "trainn150"       # Main folder (e.g., trainl, trainm, trainm150)
 EXP_NAME   = "finetune_exp1"   # Sub-folder (e.g., finetune_exp1)
 
 # ================================

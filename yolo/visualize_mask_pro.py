@@ -4,10 +4,19 @@ import numpy as np
 import os
 
 def visualize_mask(image_path, yolo_results, our_model_results_confidence, output_path):
-    # Check files
-    if not os.path.exists(image_path): return
-    if not os.path.exists(yolo_results): return
-    if not os.path.exists(our_model_results_confidence): return
+    # 1. Check which files are missing (Robust Skipping)
+    files_to_check = [
+        (image_path, "Original Image"),
+        (yolo_results, "YOLO Prediction"),
+        (our_model_results_confidence, "USIS Prediction")
+    ]
+    
+    missing = [name for path, name in files_to_check if not os.path.exists(path)]
+    
+    if missing:
+        # Print warning and SKIP this image
+        print(f"⚠️ Skipping {os.path.basename(image_path) if os.path.exists(image_path) else 'File'} - Missing: {', '.join(missing)}")
+        return
 
     # Load images
     image = cv2.imread(image_path)          # Width: w
@@ -15,7 +24,7 @@ def visualize_mask(image_path, yolo_results, our_model_results_confidence, outpu
     usis_img = cv2.imread(our_model_results_confidence) # Width: 2w (assumed)
     
     if image is None or yolo_img is None or usis_img is None:
-        print(f"❌ Error reading images")
+        print(f"❌ Error reading images (corrupt file?) for {os.path.basename(image_path)}")
         return
 
     h, w, _ = image.shape
@@ -28,9 +37,6 @@ def visualize_mask(image_path, yolo_results, our_model_results_confidence, outpu
     row1 = np.concatenate((image, yolo_img), axis=1)
     
     # 3. Resize USIS to match the FULL WIDTH of Row 1 (2w)
-    # We keep the aspect ratio or just force fit to (2w, h)
-    # Usually, if USIS is side-by-side already, its natural shape is (h, 2w)
-    
     target_width = row1.shape[1] # Should be 2*w
     target_height = h            # Keep height same as original rows
     
@@ -55,7 +61,7 @@ def visualize_mask(image_path, yolo_results, our_model_results_confidence, outpu
     cv2.putText(combined, "YOLO Prediction", (w + 50, 80), font, font_scale, color, thickness)
     
     # Bottom: USIS (Centered-ish title)
-    cv2.putText(combined, "USIS (GT + Prediction)", (50, h + 80), font, font_scale, color, thickness)
+    cv2.putText(combined, " GT                         USIS Prediction", (50, h + 80), font, font_scale, color, thickness)
 
     # Save
     cv2.imwrite(output_path, combined)
@@ -63,15 +69,15 @@ def visualize_mask(image_path, yolo_results, our_model_results_confidence, outpu
 
 
 if __name__ == "__main__":
-    # Configuration
-    NUM_IMAGES = 50
-    MODEL_NAME = "trainl"
+    # Configurations
+    NUM_IMAGES = 1000
+    MODEL_NAME = "trainx200"
     
     # Paths
     BASE_DATA = "/workspace/data/yolo/test"
-    YOLO_PRED_DIR = f"/workspace/USIS10K/work_dirs/yolo/predictions/runs/segment/{MODEL_NAME}/results"
+    YOLO_PRED_DIR = f"/workspace/USIS10K/work_dirs/yolo/predictions/runs/segment/{MODEL_NAME}/test_results/visual_predictions"
     USIS_PRED_DIR = "/workspace/USIS10K/work_dirs/usis_multiclass_eval/20251120_210127/vis_data/vis_image"
-    OUTPUT_DIR = "/workspace/USIS10K/work_dirs/comparisons_final"
+    OUTPUT_DIR = "/workspace/USIS10K/work_dirs/comparison"
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     print(f"🔍 Generating comparisons in: {OUTPUT_DIR}")
